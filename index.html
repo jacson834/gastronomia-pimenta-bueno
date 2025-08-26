@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gastronomia Pimenta Bueno - Os Melhores Sabores da Cidade</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffeb3b;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('pizza.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ff6b35;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .cta-button:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 80px;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border-radius: 2px;
+        }
+
+        /* Search Bar */
+        .search-container {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto 3rem auto;
+        }
+
+        #search-input {
+            width: 100%;
+            padding: 0.8rem 1.5rem 0.8rem 3rem;
+            border-radius: 50px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        #search-input:focus {
+            outline: none;
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+        }
+
+        /* Restaurant Cards */
+        .restaurants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .restaurant-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border: 1px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .restaurant-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+        }
+
+        .restaurant-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .restaurant-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .restaurant-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .restaurant-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #666;
+        }
+
+        .info-item i {
+            color: #ff6b35;
+            width: 20px;
+        }
+
+        .phone-link {
+            color: #ff6b35;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .phone-link:hover {
+            color: #e55a2b;
+        }
+
+        .map-link {
+            text-decoration: none;
+        }
+
+        .map-link .info-item:hover span {
+            color: #e55a2b;
+            text-decoration: underline;
+        }
+
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-about {
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-about h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ff6b35;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #ff6b35;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(135deg, #ff6b35, #f7931e);
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .restaurants-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .restaurant-card {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .restaurants-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .restaurant-card {
+                padding: 1rem;
+            }
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #ff6b35;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-utensils"></i>
+                Gastronomia de Pimenta Bueno
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#restaurantes">Restaurantes</a></li>
+                <li><a href="#contato">Sobre</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Gastronomia de Pimenta Bueno</h1>
+            <p>Descubra os melhores sabores da cidade! Conheça os restaurantes, lanchonetes e pizzarias que fazem de Pimenta Bueno um destino gastronômico único.</p>
+            <a href="#restaurantes" class="cta-button">
+                <i class="fas fa-utensils"></i> Explorar Restaurantes
+            </a>
+        </div>
+    </section>
+
+    <main>
+        <section id="restaurantes" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in">Nossos Restaurantes</h2>
+                <div class="search-container fade-in">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="search-input" placeholder="Buscar por nome do restaurante...">
+                </div>
+                <div class="restaurants-grid">
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-drumstick-bite"></i>
+                        </div>
+                        <h3 class="restaurant-name">CALEB ESPETO E PIZZARIA</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=CALEB+ESPETO+E+PIZZARIA%2C+Av.+Pres.+J.K.%2C+186+-+Alvorada%2C+Pimenta+Bueno+-+RO" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Av. Pres. J.K., 186 - Alvorada, Pimenta Bueno - RO</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=556934515255" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 3451-5255</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-hamburger"></i>
+                        </div>
+                        <h3 class="restaurant-name">GARDEN BURGUER BAR</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=GARDEN+BURGUER+BAR%2C+Av.+Pres.+J.K.%2C+283+-+Alvorada%2C+Pimenta+Bueno%2C+RO" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Av. Pres. J.K., 283 - Alvorada</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569999914553" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99991-4553</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <h3 class="restaurant-name">RESTAURANTE E CHURRASCARIA ITAPORANGA</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=RESTAURANTE+E+CHURRASCARIA+ITAPORANGA%2C+Rod+Br+364%2C+s%2Fn+km+202+-+Br+364%2C+Distrito+do+Itaporanga%2C+Pimenta+Bueno%2C+RO" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Rod Br 364, s/n km 202 - Br 364, Distrito do Itaporanga</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=556934516997" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 3451-6997</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">GARDILSON'S RESTAURANTE E BUFFET</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=GARDILSON%27S+RESTAURANTE+E+BUFFET%2C+Av.+Pres.+Kennedy%2C+78+-+Pioneiros%2C+Pimenta+Bueno%2C+RO" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Av. Pres. Kennedy, 78 - Pioneiros</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=556934513080" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 3451-3080</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Churrascaria Simoni</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Churrascaria+Simoni%2C+R.+Petr%C3%B4nio+Portela%2C+50+-+Apidia%2C+Pimenta+Bueno+-+RO%2C+78984-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>R. Petrônio Portela, 50 - Apidia, Pimenta Bueno - RO, 78984-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=556934512067" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 3451-2067</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Restaurante D'Gust</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Restaurante+D%27Gust%2C+Q12%2C+C22+-+Seringal%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Q12, C22 - Seringal, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569981230173" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 98123-0173</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Restaurante Estela</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Restaurante+Estela%2C+R.+Rui+Barbosa%2C+565+-+Beira+Rios%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>R. Rui Barbosa, 565 - Beira Rios, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569993079122" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99307-9122</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Sabor de Minas</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Sabor+de+Minas%2C+Av.+Castelo+Branco%2C+535+-+Pioneiros%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Av. Castelo Branco, 535 - Pioneiros, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=556934519656" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 3451-9656</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Restaurante - Merenda da Mata</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Restaurante+-+Merenda+da+Mata%2C+Av.+Pres.+J.K.%2C+705+-+Alvorada%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Av. Pres. J.K., 705 - Alvorada, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569993246032" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99324-6032</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Restaurante Du shopping</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Restaurante+Du+shopping%2C+Av.+Mal.+Rondon%2C+976+-+Pioneiros%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Av. Mal. Rondon, 976 - Pioneiros, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=556934519212" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 3451-9212</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Choppão Chopperia e Pizzaria</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Chopp%C3%A3o+Chopperia+e+Pizzaria%2C+Av.+Tur%C3%ADbio+Odilon+Ribeiro%2C+152+-+Apidia%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Av. Turíbio Odilon Ribeiro, 152 - Apidia, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=556934517741" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 3451-7741</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Brasão Espetos</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Bras%C3%A3o+Espetos%2C+R.+Ricardo+Franco%2C+375+-+Jardim+das+Oliveiras+2%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>R. Ricardo Franco, 375 - Jardim das Oliveiras 2, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569999917416" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99991-7416</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Vita Suco</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Vita+Suco%2C+R.+Mascarenhas+de+Moraes%2C+15+-+Pioneiros%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>R. Mascarenhas de Moraes, 15 - Pioneiros, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=556934512755" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 3451-2755</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Churrascaria Pimentão</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Churrascaria+Piment%C3%A3o%2C+anexo+ao+Posto+Piment%C3%A3o+em+-+BR-364+-+Bela+Vista%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>anexo ao Posto Pimentão em - BR-364 - Bela Vista, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569993101021" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99310-1021</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Gela Guela</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Gela+Guela%2C+R.+dos+Inconfidentes%2C+1112+-+Alvorada%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>R. dos Inconfidentes, 1112 - Alvorada, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569999651928" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99965-1928</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Jardim Restaurante</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Jardim+Restaurante%2C+Av.+Cunha+Bueno%2C+1065+-+Pioneiros%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Av. Cunha Bueno, 1065 - Pioneiros, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569992354862" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99235-4862</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Conveniência e Restaurante AmPM - União</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Conveni%C3%AAncia+e+Restaurante+AmPM+-+Uni%C3%A3o%2C+Rodovia+BR+364+Km+194+-+St.+Industrial%2C+Pimenta+Bueno%2C+RO" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Rodovia BR 364 Km 194 - St. Industrial</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=556934516444" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 3451-6444</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Lírios Restaurante e Eventos</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=L%C3%ADrios+Restaurante+e+Eventos%2C+Av.+Tur%C3%ADbio+Odilon+Ribeiro%2C+130+-+Pioneiros%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Av. Turíbio Odilon Ribeiro, 130 - Pioneiros, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569993049239" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99304-9239</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Gaucho churrascaria</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Gaucho+churrascaria%2C+Av.+Brasil%2C+7408+-+Apidia%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Av. Brasil, 7408 - Apidia, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569999302916" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99930-2916</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Restaurante Pimenta Caipira</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=323R%2BG4+-+Pimenta+Bueno%2C+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>323R+G4 - Pimenta Bueno, RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569996007049" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99600-7049</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Na Brasa Delivery</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Na+Brasa+Delivery%2C+Quadra%2C+13+-+casa+28+-+Bnh%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Quadra, 13 - casa 28 - Bnh, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569999143015" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99914-3015</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Restaurante e Conveniência Aviador</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Restaurante+e+Conveni%C3%AAncia+Aviador%2C+Rodovia+BR+364+Lote+38RA+Gleba+Corumbiara+Sala+1+Setor+Urucumacua%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Rodovia BR 364 Lote 38RA Gleba Corumbiara Sala 1 Setor Urucumacua, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=556934514369" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 3451-4369</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Hot Pizza Pimenta</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Hot+Pizza+Pimenta%2C+R.+Alcinda+Ribeiro+de+Souza%2C+393-B+-+Alvorada%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>R. Alcinda Ribeiro de Souza, 393-B - Alvorada, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569996061414" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99606-1414</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Marmitaria Panela Quente</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Marmitaria+Panela+Quente%2C+Av.+Salvador%2C+1136+-+Nova+Pimenta%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Av. Salvador, 1136 - Nova Pimenta, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569999517060" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99951-7060</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Restaurante e Marmitex oliveira</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Restaurante+e+Marmitex+oliveira%2C+Av.+Vit%C3%B3ria%2C+N%C3%BAmero+844+-+Nova+Pimenta%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Av. Vitória, Número 844 - Nova Pimenta, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569999844344" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99984-4344</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Nem te conto, Café e Brownie</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Nem+te+conto%2C+Caf%C3%A9+e+Brownie%2C+Avenida+Carlos+Dornejes+260%2C+Pimenta+Bueno+-+RO%2C+76870-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Avenida Carlos Dornejes 260, Pimenta Bueno - RO, 76870-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569985003622" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 98500-3622</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Restaurante Mila</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Restaurante+Mila%2C+Av.+Cunha+Bueno%2C+1075+-+Pioneiros%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Av. Cunha Bueno, 1075 - Pioneiros, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569999259738" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99925-9738</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Restaurante Kanolla</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Restaurante+Kanolla%2C+Sa%C3%ADda+para+Cacoal+ao+lado+da+Borracharia+do+Posto+Piment%C3%A3o+-+BR-364+-+Bela+Vista%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Saída para Cacoal ao lado da Borracharia do Posto Pimentão - BR-364 - Bela Vista, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569993441926" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99344-1926</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Casa Salgado</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Casa+Salgado%2C+Av.+Macei%C3%B3+-+Nova+Pimenta%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Av. Maceió - Nova Pimenta, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569993124433" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99312-4433</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Saladão e CIA</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Salad%C3%A3o+e+CIA%2C+Vila+Nova%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Vila Nova, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569999542654" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99954-2654</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Espeto e Cia</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Espeto+e+Cia%2C+R.+Costa+Marques%2C+378.A+-+Pioneiros%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>R. Costa Marques, 378.A - Pioneiros, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569999533244" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99953-3244</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Jantinha da Flor</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Jantinha+da+Flor%2C+Quadra%2C+14+-+casa+15+-+Bnh%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Quadra, 14 - casa 15 - Bnh, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569999003022" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99900-3022</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Hot Dog Lopes</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Hot+Dog+Lopes%2C+R.+Carlos+Gomes%2C+1345+-+Seringal%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>R. Carlos Gomes, 1345 - Seringal, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569999673100" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99967-3100</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Assim Assado - Espetinho do Dodô</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Assim+Assado+-+Espetinho+do+Dod%C3%B4%2C+Av.+Pres.+J.K.%2C+n%C2%B0298+-+Alvorada%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Av. Pres. J.K., n°298 - Alvorada, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569999145231" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99914-5231</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Ceará Espetinhos</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Cear%C3%A1+Espetinhos%2C+Av.+Salvador%2C+1087+-+Nova+Pimenta%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Av. Salvador, 1087 - Nova Pimenta, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569999591983" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99959-1983</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Matin Lanches & espetinhos</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Matin+Lanches+%26+espetinhos%2C+R.+Prudente+de+Mor%C3%A3es%2C+651-767+-+Pioneiros%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>R. Prudente de Morães, 651-767 - Pioneiros, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=55699999962540" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99999-62540</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Paulistano Burger</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Paulistano+Burger%2C+R.+Carlos+Gomes%2C+317+-+Vila+Nova%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>R. Carlos Gomes, 317 - Vila Nova, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569999273019" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99927-3019</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restaurant-card fade-in">
+                        <div class="restaurant-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="restaurant-name">Casa do Hambúrguer</h3>
+                        <div class="restaurant-info">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Casa+do+Hamb%C3%BArguer%2C+R.+Padre+C%C3%ADcero+-+Beira+Rios%2C+Pimenta+Bueno+-+RO%2C+76970-000" target="_blank" rel="noopener noreferrer" class="map-link">
+                                <div class="info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>R. Padre Cícero - Beira Rios, Pimenta Bueno - RO, 76970-000</span>
+                                </div>
+                            </a>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5569992547598" target="_blank" rel="noopener noreferrer" class="phone-link">(69) 99254-7598</a>
+                            </div>
+                        </div>
+                    </div>
+    </main>
+
+    <footer id="contato">
+        <div class="footer-content">
+            <div class="footer-about">
+                <h3>Sobre Pimenta Bueno</h3>
+                <p>Pimenta Bueno é uma cidade que respira gastronomia! Com uma rica diversidade culinária, oferece desde deliciosas pizzas e lanches até tradicionais churrascarias e buffets variados. Nossa cidade se destaca pela qualidade dos estabelecimentos, que combinam tradição e inovação, proporcionando experiências únicas para moradores e visitantes. Venha descobrir os sabores autênticos de Rondônia!</p>
+            </div>
+            <p>&copy; 2025 Gastronomia Pimenta Bueno. Todos os direitos reservados.</p>
+            <p>Desenvolvido com <i class="fas fa-heart" style="color: #ff6b35;"></i> para promover a gastronomia local</p>
+        </div>
+    </footer>
+
+    <button class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // Close mobile menu after clicking
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Scroll to top button
+        const scrollTopBtn = document.getElementById('scrollTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Restaurant search filter
+        const searchInput = document.getElementById('search-input');
+        const grid = document.querySelector('.restaurants-grid');
+        let cards = Array.from(grid.querySelectorAll('.restaurant-card'));
+
+        // Sort cards alphabetically by name
+        cards.sort((a, b) => {
+            const nameA = a.querySelector('.restaurant-name').textContent.trim();
+            const nameB = b.querySelector('.restaurant-name').textContent.trim();
+            return nameA.localeCompare(nameB, 'pt-BR');
+        });
+
+        // Re-append sorted cards to the grid
+        cards.forEach(card => {
+            grid.appendChild(card);
+        });
+        
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+
+            cards.forEach(card => {
+                const restaurantName = card.querySelector('.restaurant-name').textContent.toLowerCase();
+                if (restaurantName.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Add loading animation to restaurant cards based on the new sorted order
+        cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // Phone number formatting and click tracking
+        document.querySelectorAll('.phone-link').forEach(link => {
+            link.addEventListener('click', function() {
+                // You can add analytics tracking here
+                console.log('Phone clicked:', this.textContent);
+            });
+        });
+
+        // Add hover effects to restaurant cards
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            const rate = scrolled * -0.5;
+            
+            if (hero) {
+                hero.style.transform = `translateY(${rate}px)`;
+            }
+        });
+
+        // Add typing effect to hero title
+        const heroTitle = document.querySelector('.hero h1');
+        const titleText = heroTitle.textContent;
+        heroTitle.textContent = '';
+        
+        let i = 0;
+        const typeWriter = () => {
+            if (i < titleText.length) {
+                heroTitle.textContent += titleText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        };
+        
+        // Start typing effect after page load
+        window.addEventListener('load', () => {
+            setTimeout(typeWriter, 1000);
+        });
+    </script>
+</body>
